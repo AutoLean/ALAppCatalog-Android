@@ -1,4 +1,4 @@
-package com.autolean.appcatalog.screen;
+package com.autolean.appcatalog.view;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -15,6 +15,7 @@ import com.autolean.appcatalog.data.apps.AppCatalogApp;
 import com.autolean.appcatalog.data.apps.OnAppCatalogLoadedListener;
 import com.autolean.appcatalog.data.social.AppCatalogSocialMediaOutlet;
 import com.autolean.appcatalog.data.social.OnSocialMediaLoadedListener;
+import com.uservoice.uservoicesdk.UserVoice;
 import java.util.List;
 
 public class CatalogActivity extends ActionBarActivity implements
@@ -47,10 +48,16 @@ public class CatalogActivity extends ActionBarActivity implements
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
+    switch (item.getItemId()){
+      case R.id.action_feedback:
+        UserVoice.launchUserVoice(this);
+        break;
+
+    }
     return super.onOptionsItemSelected(item);
   }
 
-  // Set the recycler layout manager. Grid if its a tablet, List if it isnt.
+  // Set the recycler layout manager. Grid if its a tablet, List if it isn't.
   private void initRecycler(){
 
     gridLayoutManager = new GridLayoutManager(this, 3);

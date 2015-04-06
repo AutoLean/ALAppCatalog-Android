@@ -92,6 +92,22 @@ public class AppCatalogSocialMediaOutlet extends ParseObject {
     put("link", value);
   }
 
+  /**
+   *
+   * @return url link (not a URI)
+   */
+  public String getBackupLink(){
+    return getString("link_backup");
+  }
+
+  public void setBackupLink(String value){
+    put("link_backup", value);
+  }
+
+  @Override public String toString() {
+    return "Backup Link: " + getBackupLink() + "\n" + "Link: " + getLink();
+  }
+
 
   public static void load(Activity activity){
     final OnSocialMediaLoadedListener mListener = (OnSocialMediaLoadedListener) activity;

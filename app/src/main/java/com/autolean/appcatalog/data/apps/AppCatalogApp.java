@@ -103,6 +103,25 @@ public class AppCatalogApp extends ParseObject {
   }
 
   /**
+   *
+   * @return String type of OS for the app
+   */
+  public int getOperatingSystem(){
+    return getInt("operatingSystem");
+  }
+
+  public void setOperatingSystem(int value){
+    put("operatingSystem", value);
+  }
+
+  @Override public String toString() {
+    return "\n" + getName() + ": "
+        + "\n" + getOperatingSystem()
+        + "\n"
+        ;
+  }
+
+  /**
    * Loads from local data store, and then load from net
    * @param activity
    */
@@ -137,5 +156,7 @@ public class AppCatalogApp extends ParseObject {
     });
 
   }
+
+
 
 }

@@ -1,6 +1,8 @@
-package com.autolean.appcatalog.screen;
+package com.autolean.appcatalog.view;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +13,7 @@ import butterknife.ButterKnife;
 import butterknife.InjectView;
 import com.autolean.appcatalog.AppCatalogApplication;
 import com.autolean.appcatalog.R;
+import com.autolean.appcatalog.aLog;
 import com.autolean.appcatalog.data.apps.AppCatalogApp;
 import com.autolean.appcatalog.data.social.AppCatalogSocialMediaOutlet;
 import java.util.List;
@@ -19,9 +22,10 @@ import java.util.List;
  * Created by AKiniyalocts on 4/3/15.
  */
 public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+  public static final String TAG = CatalogAdapter.class.getSimpleName();
+
   private LayoutInflater mInflater;
   private Context mContext;
-
   private List<AppCatalogApp> mApps;
   private List<AppCatalogSocialMediaOutlet> mSocials;
 
@@ -75,7 +79,6 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
       else {
         CatalogViewHolder catalogViewHolder = ((CatalogViewHolder) holder);
         AppCatalogApp app = mApps.get(position);
-
         AppCatalogApplication.getPicasso()
             .load(app.getIconUrl())
             .fit()
@@ -100,7 +103,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         CatalogViewHolder catalogViewHolder = ((CatalogViewHolder) holder);
 
         AppCatalogSocialMediaOutlet social = mSocials.get(position - mApps.size());
-
+        aLog.w(TAG, social.toString());
         AppCatalogApplication.getPicasso()
             .load(social.getImage2xUrl())
             .fit()
@@ -119,7 +122,8 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     return mApps.size() + mSocials.size();
   }
 
-  public static class CatalogViewHolder extends RecyclerView.ViewHolder{
+  public class CatalogViewHolder extends RecyclerView.ViewHolder implements
+      View.OnClickListener{
     @InjectView(R.id.app_icon) ImageView mImage;
     @InjectView(R.id.app_name) TextView mName;
     @InjectView(R.id.app_desc) TextView mDesc;
@@ -127,6 +131,29 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     public CatalogViewHolder(View itemView) {
       super(itemView);
       ButterKnife.inject(this, itemView);
+      itemView.setOnClickListener(this);
+    }
+
+    @Override public void onClick(View v) {
+      String url = null;
+
+      if(getItemViewType() != R.layout.list_header){
+
+        if(getPosition() >= mApps.size()){
+
+          url = mSocials.get(getPosition() - mApps.size()).getBackupLink();
+        }
+
+        else {
+          url = mApps.get(getPosition()).getLink();
+        }
+      }
+
+      if(url != null) {
+        Intent web = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        web.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        mContext.startActivity(web);
+      }
     }
   }
 
