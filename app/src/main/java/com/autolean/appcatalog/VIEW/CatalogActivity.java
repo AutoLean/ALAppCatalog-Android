@@ -7,14 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import com.autolean.appcatalog.AppCatalogApplication;
 import com.autolean.appcatalog.R;
 import com.autolean.appcatalog.data.apps.AppCatalogApp;
 import com.autolean.appcatalog.data.apps.OnAppCatalogLoadedListener;
 import com.autolean.appcatalog.data.social.AppCatalogSocialMediaOutlet;
 import com.autolean.appcatalog.data.social.OnSocialMediaLoadedListener;
+import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.UserVoice;
 import java.util.List;
 
@@ -24,7 +22,7 @@ public class CatalogActivity extends ActionBarActivity implements
 {
 
 
-  @InjectView(R.id.catalog_recycler) RecyclerView mRecycler;
+  private RecyclerView mRecycler;
 
   private CatalogAdapter adapter;
   private GridLayoutManager gridLayoutManager;
@@ -35,34 +33,47 @@ public class CatalogActivity extends ActionBarActivity implements
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_catalog);
-    ButterKnife.inject(this);
+    getSupportActionBar().setTitle("AutoLean");
+    initUserVoice();
+
+
     initRecycler();
 
     AppCatalogApp.load(this);
 
   }
 
+
+  private void initUserVoice(){
+    Config config = new Config("autolean.uservoice.com");
+    UserVoice.init(config, this);
+  }
+
+
   @Override public boolean onCreateOptionsMenu(Menu menu) {
+    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     getMenuInflater().inflate(R.menu.menu_catalog, menu);
     return super.onCreateOptionsMenu(menu);
   }
 
   @Override public boolean onOptionsItemSelected(MenuItem item) {
-    switch (item.getItemId()){
-      case R.id.action_feedback:
-        UserVoice.launchUserVoice(this);
-        break;
 
-    }
+    if(item.getItemId() == R.id.action_feedback)
+      UserVoice.launchUserVoice(this);
+
+    if(item.getItemId() == android.R.id.home)
+      onBackPressed();
+
     return super.onOptionsItemSelected(item);
   }
 
   // Set the recycler layout manager. Grid if its a tablet, List if it isn't.
   private void initRecycler(){
+    mRecycler = (RecyclerView)findViewById(R.id.catalog_recycler);
 
     gridLayoutManager = new GridLayoutManager(this, 3);
 
-    if(AppCatalogApplication.isTablet()) {
+    if(isTablet()) {
         mRecycler.setLayoutManager(gridLayoutManager);
     }
     else {
@@ -100,4 +111,9 @@ public class CatalogActivity extends ActionBarActivity implements
     adapter.notifyDataSetChanged();
 
   }
+
+  public  boolean isTablet(){
+    return getResources().getBoolean(R.bool.isTablet);
+  }
+
 }

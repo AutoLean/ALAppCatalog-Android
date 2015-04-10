@@ -9,13 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import butterknife.ButterKnife;
-import butterknife.InjectView;
-import com.autolean.appcatalog.AppCatalogApplication;
 import com.autolean.appcatalog.R;
 import com.autolean.appcatalog.aLog;
 import com.autolean.appcatalog.data.apps.AppCatalogApp;
 import com.autolean.appcatalog.data.social.AppCatalogSocialMediaOutlet;
+import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
@@ -79,7 +77,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
       else {
         CatalogViewHolder catalogViewHolder = ((CatalogViewHolder) holder);
         AppCatalogApp app = mApps.get(position);
-        AppCatalogApplication.getPicasso()
+        Picasso.with(mContext)
             .load(app.getIconUrl())
             .fit()
             .into(catalogViewHolder.mImage);
@@ -104,7 +102,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         AppCatalogSocialMediaOutlet social = mSocials.get(position - mApps.size());
         aLog.w(TAG, social.toString());
-        AppCatalogApplication.getPicasso()
+        Picasso.with(mContext)
             .load(social.getImage2xUrl())
             .fit()
             .into(catalogViewHolder.mImage);
@@ -124,13 +122,17 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
   public class CatalogViewHolder extends RecyclerView.ViewHolder implements
       View.OnClickListener{
-    @InjectView(R.id.app_icon) ImageView mImage;
-    @InjectView(R.id.app_name) TextView mName;
-    @InjectView(R.id.app_desc) TextView mDesc;
+    private final ImageView mImage;
+    private final TextView mName;
+    private final TextView mDesc;
 
     public CatalogViewHolder(View itemView) {
       super(itemView);
-      ButterKnife.inject(this, itemView);
+
+      mImage = (ImageView)itemView.findViewById(R.id.app_icon);
+      mName = (TextView)itemView.findViewById(R.id.app_name);
+      mDesc = (TextView)itemView.findViewById(R.id.app_desc);
+
       itemView.setOnClickListener(this);
     }
 
@@ -158,11 +160,11 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
   }
 
   public static class HeaderViewHolder extends RecyclerView.ViewHolder{
-    @InjectView(R.id.list_header_item) TextView mHeader;
+    private final TextView mHeader;
 
     public HeaderViewHolder(View itemView){
       super(itemView);
-      ButterKnife.inject(this, itemView);
+      mHeader = (TextView)itemView.findViewById(R.id.list_header_item);
     }
 
 

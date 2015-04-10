@@ -1,11 +1,10 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 
 android {
   compileSdkVersion 22
   buildToolsVersion "21.1.2"
 
   defaultConfig {
-    applicationId "com.autolean.appcatalog"
     minSdkVersion 15
     targetSdkVersion 22
     versionCode 1
@@ -26,7 +25,6 @@ dependencies {
   compile 'com.android.support:recyclerview-v7:21.0.0'
   compile 'com.squareup.picasso:picasso:2.5.2'
   compile 'com.squareup.okhttp:okhttp:2.3.0'
-  compile 'com.jakewharton:butterknife:6.1.0'
   compile 'com.uservoice:uservoice-android-sdk:+'
 
   compile 'com.parse.bolts:bolts-android:1.+'
