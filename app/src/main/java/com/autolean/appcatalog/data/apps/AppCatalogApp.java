@@ -23,7 +23,7 @@ public class AppCatalogApp extends ParseObject {
   public AppCatalogApp(){}
 
   /**
-   * Creating an empty App with only a header paramter
+   * Creating an empty App with only a header parameter
    * @param isHeader
    */
   public AppCatalogApp(boolean isHeader){
