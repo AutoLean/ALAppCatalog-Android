@@ -6,4 +6,7 @@
 
   <color name="selected">#70FFFFFF</color>
 
+  <color name="android_green">#8BC34A</color>
+  <color name="ios_blue">#ff007ee5</color>
+
 </resources>

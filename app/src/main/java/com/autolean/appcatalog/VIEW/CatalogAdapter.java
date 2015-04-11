@@ -26,12 +26,16 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
   private Context mContext;
   private List<AppCatalogApp> mApps;
   private List<AppCatalogSocialMediaOutlet> mSocials;
+  private int green, blue;
 
   public CatalogAdapter(Context mContext,
       List<AppCatalogApp> mApps) {
     this.mContext = mContext;
     this.mApps = mApps;
     this.mInflater = LayoutInflater.from(mContext);
+
+    green = mContext.getResources().getColor(R.color.android_green);
+    blue = mContext.getResources().getColor(R.color.ios_blue);
   }
 
   public void setSocials(List<AppCatalogSocialMediaOutlet> socials){
@@ -84,6 +88,15 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         catalogViewHolder.mName.setText(app.getName());
         catalogViewHolder.mDesc.setText(app.getDescription());
+        catalogViewHolder.mOS.setText(app.getOperatingSystem());
+
+        // Set the operating system tag
+        if(app.getOperatingSystem().toLowerCase().equals("android"))
+          catalogViewHolder.mOS.setBackgroundColor(green);
+        else
+          catalogViewHolder.mOS.setBackgroundColor(blue);
+
+        catalogViewHolder.mOS.setVisibility(View.VISIBLE);
       }
     }
 
@@ -108,6 +121,9 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             .into(catalogViewHolder.mImage);
         catalogViewHolder.mName.setText(social.getText());
         catalogViewHolder.mDesc.setText(social.getSubtitle());
+
+        // hide tag for social items
+        catalogViewHolder.mOS.setVisibility(View.INVISIBLE);
       }
 
     }
@@ -125,6 +141,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
     private final ImageView mImage;
     private final TextView mName;
     private final TextView mDesc;
+    private final TextView mOS;
 
     public CatalogViewHolder(View itemView) {
       super(itemView);
@@ -132,6 +149,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
       mImage = (ImageView)itemView.findViewById(R.id.app_icon);
       mName = (TextView)itemView.findViewById(R.id.app_name);
       mDesc = (TextView)itemView.findViewById(R.id.app_desc);
+      mOS = (TextView)itemView.findViewById(R.id.app_os);
 
       itemView.setOnClickListener(this);
     }

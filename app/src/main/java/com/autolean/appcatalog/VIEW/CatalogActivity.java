@@ -7,7 +7,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import com.autolean.appcatalog.Catalog;
 import com.autolean.appcatalog.R;
+import com.autolean.appcatalog.aLog;
 import com.autolean.appcatalog.data.apps.AppCatalogApp;
 import com.autolean.appcatalog.data.apps.OnAppCatalogLoadedListener;
 import com.autolean.appcatalog.data.social.AppCatalogSocialMediaOutlet;
@@ -20,7 +22,7 @@ public class CatalogActivity extends ActionBarActivity implements
     OnAppCatalogLoadedListener,
     OnSocialMediaLoadedListener
 {
-
+  public final static String TAG = CatalogActivity.class.getSimpleName();
 
   private RecyclerView mRecycler;
 
@@ -85,7 +87,9 @@ public class CatalogActivity extends ActionBarActivity implements
   @Override public void onAppCatalogLoaded(List<AppCatalogApp> apps) {
     if(apps != null) {
       this.apps = apps;
-
+      for (AppCatalogApp app: apps){
+        aLog.w(TAG, app.toString());
+      }
       AppCatalogSocialMediaOutlet.load(this);
     }
   }

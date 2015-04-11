@@ -106,11 +106,11 @@ public class AppCatalogApp extends ParseObject {
    *
    * @return String type of OS for the app
    */
-  public int getOperatingSystem(){
-    return getInt("operatingSystem");
+  public String getOperatingSystem(){
+    return getString("operatingSystem");
   }
 
-  public void setOperatingSystem(int value){
+  public void setOperatingSystem(String value){
     put("operatingSystem", value);
   }
 

@@ -4,8 +4,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingLeft="15dp"
-    android:paddingRight="15dp"
+
     android:elevation="100dp"
     android:background="@drawable/item_selector"
     android:clickable="true"
@@ -17,14 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="15dp"
-
         >
 
-
             <ImageView
-                android:layout_width="100dip"
-                android:layout_height="100dip"
-                android:paddingRight="20dp"
+                android:layout_width="80dip"
+                android:layout_height="80dip"
+                android:paddingRight="10dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:id="@+id/app_icon"
@@ -34,6 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerVertical="true"
+            android:id="@+id/app"
             android:layout_toRightOf="@+id/app_icon"
 
             >
@@ -56,6 +54,22 @@
                 />
         </RelativeLayout>
 
+
+
     </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginTop="5dp"
+        android:gravity="end"
+        android:textSize="16sp"
+        android:background="@color/ios_blue"
+        android:textColor="@android:color/white"
+        android:layout_gravity="bottom|right"
+
+        android:id="@+id/app_os"
+        />
 
 </android.support.v7.widget.CardView>
