@@ -19,6 +19,14 @@ Add the following to your build.gradle:
   }
 }`
 
+Add the following to your Application class to initialize Parse<br>
+`Parse.enableLocalDatastore(this);`<br>
+`ParseObject.registerSubclass(AppCatalogApp.class);`
+`ParseObject.registerSubclass(AppCatalogSocialMediaOutlet.class);`
+
+`//Change to your appropriate key for Parse`<br>
+`Parse.initialize(this, "APPLICATION_ID","CLIENT_ID");`
+
 # Start
 Start the Catalog in your Activity with the following statement:
 `Catalog.start(this);`
