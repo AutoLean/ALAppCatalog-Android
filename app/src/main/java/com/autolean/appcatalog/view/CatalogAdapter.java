@@ -91,7 +91,7 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         catalogViewHolder.mOS.setText(app.getOperatingSystem());
 
         // Set the operating system tag
-        if(app.getOperatingSystem().toLowerCase().equals("android"))
+        if(app.getOperatingSystem() != null && app.getOperatingSystem().toLowerCase().equals("android"))
           catalogViewHolder.mOS.setBackgroundColor(green);
         else
           catalogViewHolder.mOS.setBackgroundColor(blue);
