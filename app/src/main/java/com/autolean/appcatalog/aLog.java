@@ -7,7 +7,7 @@ import android.util.Log;
  */
 public class aLog {
 
-  private static boolean isLogging = true;
+  private static boolean isLogging = false;
 
   public static void w(String TAG, String msg){
     if(TAG != null && msg != null && isLogging){
