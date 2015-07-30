@@ -7,15 +7,14 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import com.autolean.appcatalog.Catalog;
+
 import com.autolean.appcatalog.R;
-import com.autolean.appcatalog.aLog;
 import com.autolean.appcatalog.data.apps.AppCatalogApp;
 import com.autolean.appcatalog.data.apps.OnAppCatalogLoadedListener;
 import com.autolean.appcatalog.data.social.AppCatalogSocialMediaOutlet;
 import com.autolean.appcatalog.data.social.OnSocialMediaLoadedListener;
-import com.uservoice.uservoicesdk.Config;
 import com.uservoice.uservoicesdk.UserVoice;
+
 import java.util.List;
 
 public class CatalogActivity extends ActionBarActivity implements
@@ -36,19 +35,11 @@ public class CatalogActivity extends ActionBarActivity implements
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_catalog);
     getSupportActionBar().setTitle("AutoLean");
-    initUserVoice();
-
 
     initRecycler();
 
     AppCatalogApp.load(this);
 
-  }
-
-
-  private void initUserVoice(){
-    Config config = new Config("autolean.uservoice.com");
-    UserVoice.init(config, this);
   }
 
 
@@ -87,9 +78,6 @@ public class CatalogActivity extends ActionBarActivity implements
   @Override public void onAppCatalogLoaded(List<AppCatalogApp> apps) {
     if(apps != null) {
       this.apps = apps;
-      for (AppCatalogApp app: apps){
-        aLog.w(TAG, app.toString());
-      }
       AppCatalogSocialMediaOutlet.load(this);
     }
   }

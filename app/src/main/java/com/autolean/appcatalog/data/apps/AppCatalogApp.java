@@ -1,12 +1,14 @@
 package com.autolean.appcatalog.data.apps;
 
 import android.app.Activity;
+
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+
 import java.util.List;
 
 /**

@@ -9,6 +9,8 @@ import com.parse.Parse;
 import com.parse.ParseCrashReporting;
 import com.parse.ParseObject;
 import com.parse.PushService;
+import com.uservoice.uservoicesdk.Config;
+import com.uservoice.uservoicesdk.UserVoice;
 
 /**
  * Created by anthony on 7/17/15.
@@ -22,12 +24,15 @@ public abstract class CatalogApp extends Application {
     public void onCreate() {
         super.onCreate();
         initParse();
+        initUserVoice();
     }
 
     public abstract Context getContext();
     public abstract String getApplicationId();
     public abstract String getClientId();
     public abstract Class getDefaultCallback();
+    public abstract String getUserVoiceWebsite();
+    public abstract int getUserVoiceForumId();
 
     public void initParse(){
         Parse.enableLocalDatastore(getContext());
@@ -38,5 +43,17 @@ public abstract class CatalogApp extends Application {
 
         Parse.initialize(getContext(), getApplicationId(), getClientId());
         PushService.setDefaultPushCallback(getContext(), getDefaultCallback());
+    }
+
+    private void initUserVoice(){
+        if(getUserVoiceWebsite() != null) {
+            Config config = new Config(getUserVoiceWebsite());
+
+            if(getUserVoiceForumId() != 0){
+                config.setForumId(getUserVoiceForumId());
+            }
+
+            UserVoice.init(config, this);
+        }
     }
 }

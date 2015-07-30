@@ -9,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.autolean.appcatalog.R;
 import com.autolean.appcatalog.aLog;
 import com.autolean.appcatalog.data.apps.AppCatalogApp;
 import com.autolean.appcatalog.data.social.AppCatalogSocialMediaOutlet;
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**

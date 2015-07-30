@@ -1,32 +1,44 @@
 package com.autolean.appcatalogtest;
 
-import android.app.Application;
-import com.autolean.appcatalog.data.apps.AppCatalogApp;
-import com.autolean.appcatalog.data.social.AppCatalogSocialMediaOutlet;
-import com.parse.Parse;
-import com.parse.ParseObject;
+import android.content.Context;
+
+import com.autolean.appcatalog.CatalogApp;
 
 /**
  * Created by AKiniyalocts on 4/11/15.
  */
-public class TestActivityApplication extends Application {
+public class TestActivityApplication extends CatalogApp {
 
-  @Override public void onCreate() {
-    super.onCreate();
+  private static String PARSE_APPLICATION_ID = "";
+  private static String PARSE_CLIENT_KEY = "";
 
-    initParse();
+  @Override
+  public Context getContext() {
+    return getApplicationContext();
   }
 
-  private void initParse(){
-    Parse.enableLocalDatastore(this);
-    ParseObject.registerSubclass(AppCatalogApp.class);
-    ParseObject.registerSubclass(AppCatalogSocialMediaOutlet.class);
+  @Override
+  public String getApplicationId() {
+    return PARSE_APPLICATION_ID;
+  }
 
-    /*
-      Change to your appropriate key for Parse
-     */
-    Parse.initialize(this, "YXWlT6b00FDzu0Vt23247ttEVjmdjhnLK8NowLrY",
-        "rMjgV5pT6Qd3kvLzk5TZWH2nyAwX8lTTR5BDjiKV");
+  @Override
+  public String getClientId() {
+    return PARSE_CLIENT_KEY;
+  }
 
+  @Override
+  public Class getDefaultCallback() {
+    return TestActivity.class;
+  }
+
+  @Override
+  public String getUserVoiceWebsite() {
+    return null;
+  }
+
+  @Override
+  public int getUserVoiceForumId() {
+    return 0;
   }
 }

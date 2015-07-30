@@ -2,6 +2,7 @@ package com.autolean.appcatalog;
 
 import android.content.Context;
 import android.content.Intent;
+
 import com.autolean.appcatalog.view.CatalogActivity;
 
 /**
