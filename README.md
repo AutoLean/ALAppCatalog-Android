@@ -9,7 +9,7 @@ App Catalog for AutoLean Applications
 	}`
 	
 `dependencies {
-      compile 'com.github.AutoLean:ALAppCatalog-Android:1.2'
+      compile 'com.github.AutoLean:ALAppCatalog-Android:v1.2'
 }`
 
 Extend the `CatalogApp.class` with your Application class and implement the required methods.
