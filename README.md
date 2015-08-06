@@ -4,20 +4,23 @@ App Catalog for AutoLean Applications
 <img src="http://i.imgur.com/p2fChY4.png" height="300" width="500"/>
 
 # Include in your project
-`repositories {
+```gradle
+repositories {
 	    maven { url "https://jitpack.io" }
-	}`
+	}
 	
-`dependencies {
+dependencies {
       compile 'com.github.AutoLean:ALAppCatalog-Android:v1.2'
-}`
+}
+```
 
 Extend the `CatalogApp.class` with your Application class and implement the required methods.
 
 # Start
 Start the Catalog in your Activity with the following statement:
-`Catalog.start(this);`
-
+```java
+Catalog.start(this);
+```
 
 License
 --------
