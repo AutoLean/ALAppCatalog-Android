@@ -10,7 +10,7 @@ repositories {
 	}
 	
 dependencies {
-      compile 'com.github.AutoLean:ALAppCatalog-Android:v1.2'
+      compile 'com.github.AutoLean:ALAppCatalog-Android:v1.2.1'
 }
 ```
 
