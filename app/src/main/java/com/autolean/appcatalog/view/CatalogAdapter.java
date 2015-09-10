@@ -161,13 +161,13 @@ public class CatalogAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
       if(getItemViewType() != R.layout.list_header){
 
-        if(getPosition() >= mApps.size()){
+        if(getAdapterPosition() >= mApps.size()){
 
-          url = mSocials.get(getPosition() - mApps.size()).getBackupLink();
+          url = mSocials.get(getAdapterPosition() - mApps.size()).getBackupLink();
         }
 
         else {
-          url = mApps.get(getPosition()).getLink();
+          url = mApps.get(getAdapterPosition()).getLink();
         }
       }
 

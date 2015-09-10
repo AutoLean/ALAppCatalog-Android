@@ -1,7 +1,9 @@
 package com.autolean.appcatalog.view;
 
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,7 +19,7 @@ import com.uservoice.uservoicesdk.UserVoice;
 
 import java.util.List;
 
-public class CatalogActivity extends ActionBarActivity implements
+public class CatalogActivity extends AppCompatActivity implements
     OnAppCatalogLoadedListener,
     OnSocialMediaLoadedListener
 {
@@ -27,6 +29,7 @@ public class CatalogActivity extends ActionBarActivity implements
 
   private CatalogAdapter adapter;
   private GridLayoutManager gridLayoutManager;
+  private ActionBar mActionbar;
 
   private List<AppCatalogApp> apps;
 
@@ -34,7 +37,10 @@ public class CatalogActivity extends ActionBarActivity implements
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_catalog);
-    getSupportActionBar().setTitle("AutoLean");
+    mActionbar = getSupportActionBar();
+
+    if(mActionbar != null)
+      getSupportActionBar().setTitle("AutoLean");
 
     initRecycler();
 
@@ -44,7 +50,10 @@ public class CatalogActivity extends ActionBarActivity implements
 
 
   @Override public boolean onCreateOptionsMenu(Menu menu) {
-    getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+    if(mActionbar != null)
+      mActionbar.setDisplayHomeAsUpEnabled(true);
+
     getMenuInflater().inflate(R.menu.menu_catalog, menu);
     return super.onCreateOptionsMenu(menu);
   }
